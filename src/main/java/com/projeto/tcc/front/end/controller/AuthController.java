@@ -4,6 +4,9 @@
  */
 package com.projeto.tcc.front.end.controller;
 
+import org.springframework.stereotype.Controller;
+
+@Controller
 public class AuthController {
     
     
