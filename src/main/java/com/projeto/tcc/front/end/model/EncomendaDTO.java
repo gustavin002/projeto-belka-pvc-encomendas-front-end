@@ -16,32 +16,35 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_encomenda")
 public class EncomendaDTO {
- 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
- 
     @Column(name = "id_encomenda")
-    private int id;
+    private Integer idEncomenda;
  
+    @Column(name = "codigo_rastreio_encomenda", nullable = false, unique = true)
     private String codigoRastreioEncomenda;
-    private String destinatarioEncomenda;
+ 
+    @Column(name = "endereco_atual_encomenda", nullable = false)
     private String enderecoAtualEncomenda;
+ 
+    @Column(name = "status_encomenda", nullable = false)
     private String statusEncomenda;
-    
-    @ManyToOne
-    @JoinColumn(name = "tb_encomenda", referencedColumnName = "id_cliente", nullable = false)
-    private EncomendaDTO cliente;
-    
-    @ManyToOne
-    @JoinColumn(name = "tb_encomenda", referencedColumnName = "id_usuario", nullable = false)
-    private EncomendaDTO usuario;
+ 
+    @ManyToOne()
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private ClienteDTO cliente;
 
-    public int getId() {
-        return id;
+    @ManyToOne()
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private OperadorLogisticoDTO operadorLogistico;
+
+    public Integer getIdEncomenda() {
+        return idEncomenda;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdEncomenda(Integer idEncomenda) {
+        this.idEncomenda = idEncomenda;
     }
 
     public String getCodigoRastreioEncomenda() {
@@ -50,14 +53,6 @@ public class EncomendaDTO {
 
     public void setCodigoRastreioEncomenda(String codigoRastreioEncomenda) {
         this.codigoRastreioEncomenda = codigoRastreioEncomenda;
-    }
-
-    public String getDestinatarioEncomenda() {
-        return destinatarioEncomenda;
-    }
-
-    public void setDestinatarioEncomenda(String destinatarioEncomenda) {
-        this.destinatarioEncomenda = destinatarioEncomenda;
     }
 
     public String getEnderecoAtualEncomenda() {
@@ -76,20 +71,20 @@ public class EncomendaDTO {
         this.statusEncomenda = statusEncomenda;
     }
 
-    public EncomendaDTO getCliente() {
+    public ClienteDTO getCliente() {
         return cliente;
     }
 
-    public void setCliente(EncomendaDTO cliente) {
+    public void setCliente(ClienteDTO cliente) {
         this.cliente = cliente;
     }
 
-    public EncomendaDTO getUsuario() {
-        return usuario;
+    public OperadorLogisticoDTO getOperadorLogistico() {
+        return operadorLogistico;
     }
 
-    public void setUsuario(EncomendaDTO usuario) {
-        this.usuario = usuario;
+    public void setOperadorLogistico(OperadorLogisticoDTO operadorLogistico) {
+        this.operadorLogistico = operadorLogistico;
     }
-    
+
 }

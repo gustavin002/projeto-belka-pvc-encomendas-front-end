@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.projeto.tcc.front.end.model;
-  
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,38 +14,52 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "tb_cliente")
 public class ClienteDTO {
- 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
- 
+    
     @Column(name = "id_cliente")
-    private int id;
+    private Integer idCliente;
  
+    @Column(name = "nome_cliente", nullable = false)
     private String nomeCliente;
+ 
+    @Column(name = "email_cliente", nullable = false, unique = true)
     private String emailCliente;
  
-    public int getId() {
-        return id;
+    @Column(name = "endereco_cliente", nullable = false)
+    private String enderecoCliente;
+
+    public Integer getIdCliente() {
+        return idCliente;
     }
- 
-    public void setId(int id) {
-        this.id = id;
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
- 
+
     public String getNomeCliente() {
         return nomeCliente;
     }
- 
+
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
     }
- 
+
     public String getEmailCliente() {
         return emailCliente;
     }
- 
+
     public void setEmailCliente(String emailCliente) {
         this.emailCliente = emailCliente;
     }
- 
+
+    public String getEnderecoCliente() {
+        return enderecoCliente;
+    }
+
+    public void setEnderecoCliente(String enderecoCliente) {
+        this.enderecoCliente = enderecoCliente;
+    }
+    
 }

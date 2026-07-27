@@ -4,11 +4,44 @@
  */
 package com.projeto.tcc.front.end.controller;
 
+import com.projeto.tcc.front.end.service.EncomendaService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class EncomendaController {
-    
-    
-    
+
+    @Autowired
+    private EncomendaService encomendaService;
+
+    @GetMapping("/operador/encomendas")
+    public String listarEncomendas(HttpSession session, Model model) {
+        
+        if (session.getAttribute("token") == null) {
+            return "redirect:/login";
+        }
+
+        String token = (String) session.getAttribute("token");
+        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token));
+        return "operador/encomendas";
+    }
+
+    @GetMapping("/operador/encomendas/cliente")
+    public String listarEncomendasPorCliente(@RequestParam(required = false) Integer idCliente, HttpSession session,
+        Model model) {
+        
+        if (session.getAttribute("token") == null) {
+            return "redirect:/login";
+        }
+
+        if (idCliente != null) {
+            model.addAttribute("encomendas", encomendaService.listarEncomendasPorCliente(idCliente));
+        }
+        return "operador/encomendas-cliente";
+    }
+
 }
