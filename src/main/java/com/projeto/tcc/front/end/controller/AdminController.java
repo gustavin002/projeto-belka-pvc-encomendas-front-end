@@ -30,9 +30,10 @@ public class AdminController {
         if (session.getAttribute("idAdmin") == null) {
             return "redirect:/login";
         }
-
-        model.addAttribute("entregadores", adminService.listarEntregadores());
-        model.addAttribute("operadores", adminService.listarOperadoresLogisticos());
+        
+        String token = (String) session.getAttribute("token");
+        model.addAttribute("entregadores", adminService.listarEntregadores(token));
+        model.addAttribute("operadores", adminService.listarOperadoresLogisticos(token));
         return "admin/usuarios";
     }
 
@@ -55,10 +56,12 @@ public class AdminController {
             return "redirect:/login";
         }
 
+        String token = (String) session.getAttribute("token");
+        
         if (role.equals("entregador")) {
-            adminService.cadastrarEntregador(usuario);
+            adminService.cadastrarEntregador(usuario, token);
         } else {
-            adminService.cadastrarOperadorLogistico(usuario);
+            adminService.cadastrarOperadorLogistico(usuario, token);
         }
 
         redirectAttributes.addFlashAttribute("sucesso", "Usuário cadastrado com sucesso!");

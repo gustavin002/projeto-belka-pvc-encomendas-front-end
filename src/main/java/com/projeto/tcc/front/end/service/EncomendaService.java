@@ -19,9 +19,9 @@ public class EncomendaService {
         this.restClient = RestClient.builder().baseUrl("http://localhost:9000").build();
     }
 
-    public List<EncomendaDTO> listarEncomendasPorOperador(String token) {
+    public List<EncomendaDTO> listarEncomendasPorOperador(String token, Integer idOperador) {
         EncomendaDTO[] encomendas = restClient.get()
-            .uri("/encomendas/operador")
+            .uri("/encomendas/operador" + idOperador)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EncomendaDTO[].class);
@@ -29,9 +29,10 @@ public class EncomendaService {
         return Arrays.asList(encomendas);
     }
 
-    public List<EncomendaDTO> listarEncomendasPorCliente(Integer idCliente) {
+    public List<EncomendaDTO> listarEncomendasPorCliente(String token, Integer idCliente) {
         EncomendaDTO[] encomendas = restClient.get()
             .uri("/encomendas/cliente/" + idCliente)
+            .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EncomendaDTO[].class);
 

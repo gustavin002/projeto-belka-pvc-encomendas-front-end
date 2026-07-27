@@ -27,8 +27,9 @@ public class EntregadorController {
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
-
-        model.addAttribute("entrega", entregadorService.buscarEntrega(idEntrega));
+        
+        String token = (String) session.getAttribute("token");
+        model.addAttribute("entrega", entregadorService.buscarEntrega(idEntrega, token));
         return "entregador/entrega";
     }
 
@@ -38,8 +39,9 @@ public class EntregadorController {
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
-
-        entregadorService.atualizarStatus(idEntrega, novoStatus);
+        
+        String token = (String) session.getAttribute("token");
+        entregadorService.atualizarStatus(idEntrega, token, novoStatus);
         return "redirect:/entregador/entregas/" + idEntrega;
     }
 
@@ -49,8 +51,9 @@ public class EntregadorController {
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
-
-        entregadorService.atualizarLocalAtual(idEntrega, novoLocal);
+        
+        String token = (String) session.getAttribute("token");
+        entregadorService.atualizarLocalAtual(idEntrega, token, novoLocal);
         return "redirect:/entregador/entregas/" + idEntrega;
     }
 
@@ -63,7 +66,8 @@ public class EntregadorController {
         }
 
         try {
-            entregadorService.validarOTP(idEntrega, otpDigitado);
+            String token = (String) session.getAttribute("token");
+            entregadorService.validarOTP(idEntrega, token, otpDigitado);
             redirectAttributes.addFlashAttribute("sucessoEntrega", "Entrega feita com sucesso!");
 
         } catch (Exception e) {

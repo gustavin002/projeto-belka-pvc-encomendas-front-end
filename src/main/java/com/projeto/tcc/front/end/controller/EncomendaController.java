@@ -19,28 +19,29 @@ public class EncomendaController {
     private EncomendaService encomendaService;
 
     @GetMapping("/operador/encomendas")
-    public String listarEncomendas(HttpSession session, Model model) {
+    public String listarEncomendasPorOperador(HttpSession session, Integer idOperador, Model model) {
         
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
 
         String token = (String) session.getAttribute("token");
-        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token));
+        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token, idOperador));
         return "operador/encomendas";
     }
 
     @GetMapping("/operador/encomendas/cliente")
-    public String listarEncomendasPorCliente(@RequestParam(required = false) Integer idCliente, HttpSession session,
-        Model model) {
+    public String listarEncomendasPorCliente(@RequestParam(required = false) Integer idCliente, HttpSession session, Model model) {
         
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
 
         if (idCliente != null) {
-            model.addAttribute("encomendas", encomendaService.listarEncomendasPorCliente(idCliente));
+            String token = (String) session.getAttribute("token");
+            model.addAttribute("encomendas", encomendaService.listarEncomendasPorCliente(token, idCliente));
         }
+        
         return "operador/encomendas-cliente";
     }
 

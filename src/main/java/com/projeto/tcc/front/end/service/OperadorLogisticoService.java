@@ -34,17 +34,19 @@ public class OperadorLogisticoService {
             .body(EncomendaDTO.class);
     }
     
-    public List<EntregadorDTO> listarEntregadoresDisponiveis() {
+    public List<EntregadorDTO> listarEntregadoresDisponiveis(String token) {
         EntregadorDTO[] entregadores = restClient.get()
             .uri("/operadores-logisticos/entregadores-disponiveis")
+            .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregadorDTO[].class);
         return Arrays.asList(entregadores);
     }
     
-    public EntregaDTO escolherEntregador(Integer idEncomenda, Integer idEntregador) {
+    public EntregaDTO escolherEntregador(Integer idEncomenda, String token, Integer idEntregador) {
         return restClient.post()
             .uri("/operadores-logisticos?idEncomenda={idEncomenda}&idEntregador={idEntregador}", idEncomenda, idEntregador)
+            .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregaDTO.class);
     }

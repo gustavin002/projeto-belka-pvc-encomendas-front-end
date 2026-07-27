@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Operador - Encomendas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Gestão de Encomendas</h2>
+            <a th:href="@{/operador/entregadores-disponiveis}" class="btn btn-warning text-dark fw-bold">Atribuir Entregadores</a>
+        </div>
+
+        <!-- Formulário para cadastrar nova encomenda (Recebe ClienteDTO) -->
+        <div class="card shadow-sm mb-5 border-primary">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Cadastrar Nova Encomenda para Cliente</h5>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/operador/encomendas/cadastrar}" method="post" class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label">Nome do Cliente</label>
+                        <input type="text" name="nome" class="form-control" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Email do Cliente</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-success w-100">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Listagem de Encomendas -->
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">Encomendas Registradas</div>
+            <div class="card-body p-0">
+                <table class="table table-striped table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Código de Rastreio</th>
+                            <th>Status</th>
+                            <th>Local Atual</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="encomenda : ${encomendas}">
+                            <td th:text="${encomenda.id}">1</td>
+                            <td class="fw-bold" th:text="${encomenda.codigoRastreio}">BR123456789</td>
+                            <td><span class="badge bg-info text-dark" th:text="${encomenda.status}">Status</span></td>
+                            <td th:text="${encomenda.localAtual}">Local</td>
+                        </tr>
+                        <tr th:if="${#lists.isEmpty(encomendas)}">
+                            <td colspan="4" class="text-center text-muted py-3">Nenhuma encomenda encontrada.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

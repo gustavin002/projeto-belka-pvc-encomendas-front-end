@@ -23,6 +23,7 @@ public class OperadorLogisticoController {
 
     @PostMapping("/operador/encomendas/cadastrar")
     public String cadastrarEncomenda(@ModelAttribute ClienteDTO cliente, HttpSession session) {
+        
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
@@ -34,22 +35,25 @@ public class OperadorLogisticoController {
 
     @GetMapping("/operador/entregadores-disponiveis")
     public String listarEntregadoresDisponiveis(HttpSession session, Model model) {
+        
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
-
-        model.addAttribute("entregadores", operadorLogisticoService.listarEntregadoresDisponiveis());
+        String token = (String) session.getAttribute("token");
+        model.addAttribute("entregadores", operadorLogisticoService.listarEntregadoresDisponiveis(token));
         return "operador/entregadores-disponiveis";
     }
 
     @PostMapping("/operador/entregas/escolher")
     public String escolherEntregador(@RequestParam int idEncomenda, @RequestParam int idEntregador, HttpSession session) {
+        
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
-
-        operadorLogisticoService.escolherEntregador(idEncomenda, idEntregador);
+        
+        String token = (String) session.getAttribute("token");
+        operadorLogisticoService.escolherEntregador(idEncomenda, token, idEntregador);
         return "redirect:/operador/encomendas";
     }
-    
+
 }
