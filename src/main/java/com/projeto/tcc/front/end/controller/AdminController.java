@@ -8,6 +8,7 @@ import com.projeto.tcc.front.end.model.UsuarioDTO;
 import com.projeto.tcc.front.end.service.AdminService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -34,10 +36,10 @@ public class AdminController {
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregadores", adminService.listarEntregadores(token));
         model.addAttribute("operadores", adminService.listarOperadoresLogisticos(token));
-        return "admin/usuarios";
+        return "admin";
     }
 
-    @GetMapping("/cadastrar")
+    @GetMapping("/formcadastrar")
     public String formCadastrar(HttpSession session, Model model) {
         
         if (session.getAttribute("idAdmin") == null) {
@@ -45,7 +47,7 @@ public class AdminController {
         }
 
         model.addAttribute("usuario", new UsuarioDTO());
-        return "admin/cadastrar-usuario";
+        return "cadastrar";
     }
 
     @PostMapping("/cadastrar")
@@ -58,10 +60,12 @@ public class AdminController {
 
         String token = (String) session.getAttribute("token");
         
-        if (role.equals("entregador")) {
+        if (role.equalsIgnoreCase("entregador")) {
             adminService.cadastrarEntregador(usuario, token);
-        } else {
+        } else if (role.equalsIgnoreCase("operador logistico")){
             adminService.cadastrarOperadorLogistico(usuario, token);
+        } else {
+            throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Erro!!! role inválida");
         }
 
         redirectAttributes.addFlashAttribute("sucesso", "Usuário cadastrado com sucesso!");

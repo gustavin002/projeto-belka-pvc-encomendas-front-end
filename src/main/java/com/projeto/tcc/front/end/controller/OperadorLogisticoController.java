@@ -45,7 +45,7 @@ public class OperadorLogisticoController {
     }
 
     @PostMapping("/operador/entregas/escolher")
-    public String escolherEntregador(@RequestParam int idEncomenda, @RequestParam int idEntregador, HttpSession session) {
+    public String escolherEntregador(@RequestParam Integer idEncomenda, @RequestParam Integer idEntregador, HttpSession session) {
         
         if (session.getAttribute("token") == null) {
             return "redirect:/login";

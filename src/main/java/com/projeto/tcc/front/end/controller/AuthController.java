@@ -5,11 +5,9 @@
 package com.projeto.tcc.front.end.controller;
 
 import com.projeto.tcc.front.end.model.AdminDTO;
-import com.projeto.tcc.front.end.model.EncomendaDTO;
 import com.projeto.tcc.front.end.model.UserRequestDTO;
 import com.projeto.tcc.front.end.model.UsuarioDTO;
 import com.projeto.tcc.front.end.service.AdminService;
-import com.projeto.tcc.front.end.service.ClienteService;
 import com.projeto.tcc.front.end.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
