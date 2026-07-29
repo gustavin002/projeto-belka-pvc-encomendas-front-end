@@ -17,12 +17,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div class="col" th:each="entregador : ${entregadores}">
                 <div class="card shadow-sm h-100">
                     <div class="card-body text-center">
-                        <h5 class="card-title" th:text="${entregador.nome}">Nome</h5>
-                        <p class="text-muted small" th:text="${entregador.email}">email</p>
+                        <h5 class="card-title" th:text="${entregador.nomeUsuario}">Nome</h5>
+                        <p class="text-muted small" th:text="${entregador.emailUsuario}">email</p>
                         <hr>
                         
-                        <form th:action="@{/operador/entregas/escolher}" method="post">
-                            <input type="hidden" name="idEntregador" th:value="${entregador.id}">
+                        <form th:action="@{/operador/escolher/entregador}" method="post">
+                            <input type="hidden" name="idEntregador" th:value="${entregador.idUsuario}">
                             
                             <div class="mb-3 text-start">
                                 <label class="form-label small">ID da Encomenda</label>
@@ -31,6 +31,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             
                             <button type="submit" class="btn btn-warning w-100">Atribuir Viagem</button>
                         </form>
+                        
                     </div>
                 </div>
             </div>
@@ -41,7 +42,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         </div>
         
         <div class="mt-4">
-            <a th:href="@{/operador/encomendas}" class="btn btn-outline-dark">&larr; Voltar para Encomendas</a>
+            <a th:href="@{/operadorencomendas}" class="btn btn-outline-dark">&larr; Voltar para Encomendas</a>
         </div>
     </div>
 </body>

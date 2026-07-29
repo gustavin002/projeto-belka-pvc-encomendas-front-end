@@ -20,8 +20,18 @@ public class OperadorLogisticoController {
 
     @Autowired
     private OperadorLogisticoService operadorLogisticoService;
+    
+    @GetMapping("/operadorencomendas")
+    public String telaOperadorEncomendas(){
+        return "operadorencomendas";
+    }
+    
+    @GetMapping("/operadorentregador")
+    public String telaOperadorEscolheEntregador(){
+        return "operadorentregador";
+    }
 
-    @PostMapping("/operador/encomendas/cadastrar")
+    @PostMapping("/operador/cadastrar/encomendas")
     public String cadastrarEncomenda(@ModelAttribute ClienteDTO cliente, HttpSession session) {
         
         if (session.getAttribute("token") == null) {
@@ -30,10 +40,10 @@ public class OperadorLogisticoController {
 
         String token = (String) session.getAttribute("token");
         operadorLogisticoService.cadastrarEncomenda(token, cliente);
-        return "redirect:/operador/encomendas";
+        return "redirect:/operadorencomendas";
     }
 
-    @GetMapping("/operador/entregadores-disponiveis")
+    @GetMapping("/operador/entregadores/disponiveis")
     public String listarEntregadoresDisponiveis(HttpSession session, Model model) {
         
         if (session.getAttribute("token") == null) {
@@ -41,10 +51,10 @@ public class OperadorLogisticoController {
         }
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregadores", operadorLogisticoService.listarEntregadoresDisponiveis(token));
-        return "operador/entregadores-disponiveis";
+        return "operadorentregador";
     }
 
-    @PostMapping("/operador/entregas/escolher")
+    @PostMapping("/operador/escolher/entregador")
     public String escolherEntregador(@RequestParam Integer idEncomenda, @RequestParam Integer idEntregador, HttpSession session) {
         
         if (session.getAttribute("token") == null) {
@@ -53,7 +63,7 @@ public class OperadorLogisticoController {
         
         String token = (String) session.getAttribute("token");
         operadorLogisticoService.escolherEntregador(idEncomenda, token, idEntregador);
-        return "redirect:/operador/encomendas";
+        return "redirect:/operadorentregador";
     }
 
 }

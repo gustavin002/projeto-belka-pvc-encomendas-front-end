@@ -69,15 +69,16 @@ public class AuthController {
 
             if (role.equals("entregador")) {
                 return "redirect:/entregador";
-            }
-
-            return "redirect:/operador";
-
+            } 
+                return "redirect:/operadorencomendas";
+            
+            
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("erroLogin", "Email ou senha inválidos");
             return "redirect:/login";
         }
     }
+    
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

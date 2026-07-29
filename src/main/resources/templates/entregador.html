@@ -20,7 +20,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                         <span>Viagem #<span th:text="${entrega.id}"></span></span>
                     </div>
                     <div class="card-body">
-                        <!-- Assumindo que a EntregaDTO possui a encomenda aninhada. Adapte se a estrutura for diferente -->
+
                         <p class="mb-1"><strong>Status:</strong> <span class="badge bg-secondary" th:text="${entrega.encomenda?.status}">Status</span></p>
                         <p class="mb-3"><strong>Destino:</strong> <span th:text="${entrega.encomenda?.localAtual}">Local</span></p>
                         

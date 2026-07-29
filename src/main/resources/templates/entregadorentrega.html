@@ -13,18 +13,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <div class="container mt-5" th:if="${entrega != null}">
         <h2 class="mb-4">Gerenciar Entrega <span class="text-primary" th:text="'#' + ${entrega.id}"></span></h2>
 
-        <!-- Alertas de sucesso e erro do OTP -->
         <div th:if="${sucessoEntrega != null}" class="alert alert-success" th:text="${sucessoEntrega}"></div>
         <div th:if="${erroOtp != null}" class="alert alert-danger" th:text="${erroOtp}"></div>
 
         <div class="row">
-            <!-- Coluna de Atualização de Local e Status -->
+
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm h-100">
                     <div class="card-header bg-dark text-white">Atualizações de Rota</div>
                     <div class="card-body">
-                        
-                        <!-- Form de Status -->
+
                         <form th:action="@{/entregador/entregas/{id}/status(id=${entrega.id})}" method="post" class="mb-4">
                             <label class="form-label">Atualizar Status</label>
                             <div class="input-group">
@@ -35,7 +33,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                         <hr>
 
-                        <!-- Form de Local -->
                         <form th:action="@{/entregador/entregas/{id}/local(id=${entrega.id})}" method="post">
                             <label class="form-label">Atualizar Local Atual</label>
                             <div class="input-group">

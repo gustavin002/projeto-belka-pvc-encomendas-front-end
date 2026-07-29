@@ -47,7 +47,7 @@ public class AdminController {
         }
 
         model.addAttribute("usuario", new UsuarioDTO());
-        return "cadastrar";
+        return "admincadastrar";
     }
 
     @PostMapping("/cadastrar")

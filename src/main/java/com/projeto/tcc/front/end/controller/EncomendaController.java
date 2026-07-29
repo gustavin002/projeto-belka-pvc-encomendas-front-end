@@ -18,16 +18,20 @@ public class EncomendaController {
     @Autowired
     private EncomendaService encomendaService;
 
-    @GetMapping("/operador/encomendas")
-    public String listarEncomendasPorOperador(HttpSession session, Integer idOperador, Model model) {
-        
-        if (session.getAttribute("token") == null) {
-            return "redirect:/login";
-        }
+    public String listarEncomendasPorOperador(HttpSession session, Model model, Integer idOperadorLogistico) { 
+    
+    if (session.getAttribute("token") == null) {
+        return "redirect:/login";
+    }
 
-        String token = (String) session.getAttribute("token");
-        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token, idOperador));
-        return "operador/encomendas";
+    String token = (String) session.getAttribute("token");
+
+    if (idOperadorLogistico != null) {
+        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token, idOperadorLogistico));
+    }
+    
+    return "operadorencomendas";
+        
     }
 
     @GetMapping("/operador/encomendas/cliente")
@@ -42,7 +46,7 @@ public class EncomendaController {
             model.addAttribute("encomendas", encomendaService.listarEncomendasPorCliente(token, idCliente));
         }
         
-        return "operador/encomendas-cliente";
+        return "operadorcliente";
     }
 
 }

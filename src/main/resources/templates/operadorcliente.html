@@ -12,13 +12,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <body class="bg-light">
     <div class="container mt-5">
         <h2 class="mb-4">Consultar Encomendas por Cliente</h2>
-
         <div class="card shadow-sm mb-4">
+            
             <div class="card-body">
+                
                 <form th:action="@{/operador/encomendas/cliente}" method="get" class="d-flex gap-2">
                     <input type="number" name="idCliente" class="form-control" placeholder="Digite o ID do Cliente" required>
                     <button type="submit" class="btn btn-primary">Buscar</button>
                 </form>
+                
             </div>
         </div>
 
@@ -26,20 +28,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <div class="card-header bg-dark text-white">Resultados da Busca</div>
             <div class="card-body p-0">
                 <table class="table table-striped mb-0">
+                    
                     <thead class="table-light">
+                        
                         <tr>
                             <th>Código</th>
                             <th>Status</th>
                             <th>Local</th>
                         </tr>
+                        
                     </thead>
+                    
                     <tbody>
                         <tr th:each="encomenda : ${encomendas}">
-                            <td class="fw-bold" th:text="${encomenda.codigoRastreio}">BR...</td>
-                            <td th:text="${encomenda.status}">Status</td>
-                            <td th:text="${encomenda.localAtual}">Local</td>
+                            <td class="fw-bold" th:text="${encomenda.codigoRastreioEncomenda}">BR...</td>
+                            <td th:text="${encomenda.statusEncomenda}">Status</td>
+                            <td th:text="${encomenda.localAtualEncomenda}">Local</td>
                         </tr>
                     </tbody>
+                    
                 </table>
             </div>
         </div>
