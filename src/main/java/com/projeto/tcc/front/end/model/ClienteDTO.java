@@ -4,30 +4,11 @@
  */
 package com.projeto.tcc.front.end.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "tb_cliente")
 public class ClienteDTO {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    @Column(name = "id_cliente")
     private Integer idCliente;
- 
-    @Column(name = "nome_cliente", nullable = false)
     private String nomeCliente;
- 
-    @Column(name = "email_cliente", nullable = false, unique = true)
     private String emailCliente;
- 
-    @Column(name = "endereco_cliente", nullable = false)
     private String enderecoCliente;
 
     public Integer getIdCliente() {

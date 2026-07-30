@@ -18,14 +18,14 @@ public class EntregaController {
     private EntregaService entregaService;
 
     @GetMapping("/entregador")
-    public String minhasEntregas(HttpSession session, Model model) {
+    public String listarEntregasDoEntregador(HttpSession session, Model model) {
         
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
 
         String token = (String) session.getAttribute("token");
-        model.addAttribute("entregas", entregaService.listarMinhasEntregas(token));
+        model.addAttribute("entregas", entregaService.listarEntregasDoEntregador(token));
         return "entregador/minhas-entregas";
     }
 

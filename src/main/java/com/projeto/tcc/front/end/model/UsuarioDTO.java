@@ -4,39 +4,12 @@
  */
 package com.projeto.tcc.front.end.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.DiscriminatorType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "tb_usuario")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role_usuario", discriminatorType = DiscriminatorType.STRING)
 public class UsuarioDTO {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    @Column(name = "id_usuario")
+
     private Integer idUsuario;
- 
-    @Column(name = "nome_usuario", nullable = false)
     private String nomeUsuario;
- 
-    @Column(name = "email_usuario", nullable = false, unique = true)
     private String emailUsuario;
- 
-    @Column(name = "senha_usuario", nullable = false)
     private String senhaUsuario;
- 
-    @Column(name = "disponibilidade_usuario", nullable = false)
     private String disponibilidadeUsuario;
 
     public Integer getIdUsuario() {

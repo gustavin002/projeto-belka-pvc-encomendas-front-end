@@ -4,40 +4,16 @@
  */
 package com.projeto.tcc.front.end.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "tb_encomenda")
 public class EncomendaDTO {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_encomenda")
     private Integer idEncomenda;
- 
-    @Column(name = "codigo_rastreio_encomenda", nullable = false, unique = true)
     private String codigoRastreioEncomenda;
- 
-    @Column(name = "endereco_atual_encomenda", nullable = false)
     private String enderecoAtualEncomenda;
- 
-    @Column(name = "status_encomenda", nullable = false)
     private String statusEncomenda;
- 
-    @ManyToOne()
-    @JoinColumn(name = "id_cliente", nullable = false)
     private ClienteDTO cliente;
-
-    @ManyToOne()
-    @JoinColumn(name = "id_usuario", nullable = false)
     private OperadorLogisticoDTO operadorLogistico;
+    private EntregadorDTO entregador;
 
     public Integer getIdEncomenda() {
         return idEncomenda;
@@ -85,6 +61,14 @@ public class EncomendaDTO {
 
     public void setOperadorLogistico(OperadorLogisticoDTO operadorLogistico) {
         this.operadorLogistico = operadorLogistico;
+    }
+
+    public EntregadorDTO getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(EntregadorDTO entregador) {
+        this.entregador = entregador;
     }
 
 }

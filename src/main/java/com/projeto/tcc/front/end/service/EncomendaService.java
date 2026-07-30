@@ -29,9 +29,9 @@ public class EncomendaService {
         return Arrays.asList(encomendas);
     }
 
-    public List<EncomendaDTO> listarEncomendasPorCliente(String token, Integer idCliente) {
+    public List<EncomendaDTO> listarEncomendasPorEntregador(String token, Integer idEntregador) {
         EncomendaDTO[] encomendas = restClient.get()
-            .uri("/encomendas/cliente/" + idCliente)
+            .uri("/encomendas/cliente/" + idEntregador)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EncomendaDTO[].class);

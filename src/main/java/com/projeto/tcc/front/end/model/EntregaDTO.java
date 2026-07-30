@@ -4,40 +4,16 @@
  */
 package com.projeto.tcc.front.end.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "tb_entrega")
 public class EntregaDTO {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_entrega")
     private Integer idEntrega;
-    
-    @Column(name = "data_hora_entrega", nullable = false)
     private LocalDateTime dataHoraEntrega;
- 
-    @Column(name = "codigo_otp_entrega", nullable = false)
     private String codigoOtpEntrega;
- 
-    @OneToOne
-    @JoinColumn(name = "id_encomenda", nullable = false)
     private EncomendaDTO encomenda;
- 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
     private EntregadorDTO entregador;
-
+    
     public Integer getIdEntrega() {
         return idEntrega;
     }

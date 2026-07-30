@@ -4,27 +4,10 @@
  */
 package com.projeto.tcc.front.end.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "tb_admin")
 public class AdminDTO {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    @Column(name = "id_admin")
     private Integer idAdmin;
- 
-    @Column(name = "email_admin", nullable = false, unique = true)
     private String emailAdmin;
- 
-    @Column(name = "senha_admin", nullable = false)
     private String senhaAdmin;
 
     public Integer getIdAdmin() {
