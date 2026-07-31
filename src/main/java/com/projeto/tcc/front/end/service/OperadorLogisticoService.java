@@ -27,7 +27,7 @@ public class OperadorLogisticoService {
 
     public EncomendaDTO cadastrarEncomenda(String token, ClienteDTO clienteRequest) {
         return restClient.post()
-            .uri("/operadores-logisticos/cadastrar-encomenda")
+            .uri("/operador/cadastrar/encomendas")
             .header("Authorization", "Bearer " + token)
             .body(clienteRequest)
             .retrieve()
@@ -36,7 +36,7 @@ public class OperadorLogisticoService {
     
     public List<EntregadorDTO> listarEntregadoresDisponiveis(String token) {
         EntregadorDTO[] entregadores = restClient.get()
-            .uri("/operadores-logisticos/entregadores-disponiveis")
+            .uri("/operador/entregadores/disponiveis")
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregadorDTO[].class);
@@ -45,7 +45,7 @@ public class OperadorLogisticoService {
     
     public EntregaDTO escolherEntregador(Integer idEncomenda, String token, Integer idEntregador) {
         return restClient.post()
-            .uri("/operadores-logisticos?idEncomenda={idEncomenda}&idEntregador={idEntregador}", idEncomenda, idEntregador)
+            .uri("/operadores/escolher/entregador?idEncomenda={idEncomenda}&idEntregador={idEntregador}", idEncomenda, idEntregador)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregaDTO.class);

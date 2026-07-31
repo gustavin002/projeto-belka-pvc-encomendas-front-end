@@ -24,7 +24,7 @@ public class EntregaService {
 
     public List<EntregaDTO> listarEntregasDoEntregador(String token) {
         EntregaDTO[] entregas = restClient.get()
-            .uri("/entregas/minhas-entregas")
+            .uri("/listar/entregas/entregador")
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregaDTO[].class);

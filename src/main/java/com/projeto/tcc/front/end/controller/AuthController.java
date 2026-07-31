@@ -70,7 +70,7 @@ public class AuthController {
             if (role.equals("entregador")) {
                 return "redirect:/entregador";
             } 
-                return "redirect:/operadorencomendas";
+                return "redirect:/operador/encomendas";
             
             
         } catch (Exception e) {

@@ -19,9 +19,9 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/minha-encomenda")
+    @GetMapping("/minha/encomenda")
     public String minhaEncomenda() {
-        return "minha-encomenda";
+        return "minhaencomenda";
     }
     
     @GetMapping("/rastreio")
@@ -30,10 +30,10 @@ public class ClienteController {
         if (codigo != null && !codigo.isEmpty()) {
             EncomendaDTO encomenda = clienteService.rastrearEncomenda(codigo);
             model.addAttribute("encomenda", encomenda);
-            return "redirect:/minha-encomenda";
+            return "minhaencomenda";
         } else {
             model.addAttribute("erroRastreio", "Código de rastreio incorreto");
-            return "redirect:/";
+            return "index";
         }
         
     }

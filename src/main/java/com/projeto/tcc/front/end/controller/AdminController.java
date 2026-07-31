@@ -36,6 +36,7 @@ public class AdminController {
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregadores", adminService.listarEntregadores(token));
         model.addAttribute("operadores", adminService.listarOperadoresLogisticos(token));
+        
         return "admin";
     }
 
@@ -47,6 +48,7 @@ public class AdminController {
         }
 
         model.addAttribute("usuario", new UsuarioDTO());
+        
         return "admincadastrar";
     }
 
@@ -69,6 +71,7 @@ public class AdminController {
         }
 
         redirectAttributes.addFlashAttribute("sucesso", "Usuário cadastrado com sucesso!");
+        
         return "redirect:/admin";
     }
     

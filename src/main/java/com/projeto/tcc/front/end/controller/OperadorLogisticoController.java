@@ -21,18 +21,13 @@ public class OperadorLogisticoController {
     @Autowired
     private OperadorLogisticoService operadorLogisticoService;
     
-    @GetMapping("/operadorencomendas")
-    public String telaOperadorEncomendas(){
-        return "operadorencomendas";
-    }
-    
     @GetMapping("/operadorentregador")
     public String telaOperadorEscolheEntregador(){
         return "operadorentregador";
     }
 
     @PostMapping("/operador/cadastrar/encomendas")
-    public String cadastrarEncomenda(@ModelAttribute ClienteDTO cliente, HttpSession session) {
+    public String cadastrarEncomenda(@ModelAttribute ClienteDTO cliente, HttpSession session, Model model) {
         
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
@@ -40,7 +35,8 @@ public class OperadorLogisticoController {
 
         String token = (String) session.getAttribute("token");
         operadorLogisticoService.cadastrarEncomenda(token, cliente);
-        return "redirect:/operadorencomendas";
+        
+        return "redirect:/operador/encomendas";
     }
 
     @GetMapping("/operador/entregadores/disponiveis")
@@ -51,6 +47,7 @@ public class OperadorLogisticoController {
         }
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregadores", operadorLogisticoService.listarEntregadoresDisponiveis(token));
+        
         return "operadorentregador";
     }
 
@@ -63,7 +60,8 @@ public class OperadorLogisticoController {
         
         String token = (String) session.getAttribute("token");
         operadorLogisticoService.escolherEntregador(idEncomenda, token, idEntregador);
-        return "redirect:/operadorentregador";
+        
+        return "redirect:/operador/entregadores/disponiveis";
     }
 
 }

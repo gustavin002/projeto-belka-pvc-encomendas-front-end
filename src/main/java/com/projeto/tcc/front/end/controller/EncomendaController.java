@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class EncomendaController {
@@ -18,18 +17,15 @@ public class EncomendaController {
     @Autowired
     private EncomendaService encomendaService;
     
-    @GetMapping("/operador/encomendas/operador")
-    public String listarEncomendasPorOperador(HttpSession session, Model model, Integer idOperadorLogistico) { 
+    @GetMapping("/operador/encomendas")
+    public String listarEncomendasPorOperador(HttpSession session, Model model) { 
     
         if (session.getAttribute("token") == null) {
             return "redirect:/login";
         }
 
         String token = (String) session.getAttribute("token");
-
-        if (idOperadorLogistico != null) {
-            model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token, idOperadorLogistico));
-        }
+        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token));
     
         return "operadorencomendas";
     }
