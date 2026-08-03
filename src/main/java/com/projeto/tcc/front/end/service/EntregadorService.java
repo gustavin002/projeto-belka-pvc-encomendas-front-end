@@ -20,7 +20,7 @@ public class EntregadorService {
             .build();
     }
 
-    public EntregaDTO buscarEntrega(Integer idEntrega, String token) {
+    public EntregaDTO verEntrega(Integer idEntrega, String token) {
         return restClient.get()
             .uri("/entregadores/entregas/" + idEntrega)
             .header("Authorization", "Bearer " + token)

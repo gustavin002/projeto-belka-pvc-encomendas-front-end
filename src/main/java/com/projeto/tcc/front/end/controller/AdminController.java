@@ -14,13 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -40,7 +38,7 @@ public class AdminController {
         return "admin";
     }
 
-    @GetMapping("/formcadastrar")
+    @GetMapping("/admin/formcadastrar")
     public String formCadastrar(HttpSession session, Model model) {
         
         if (session.getAttribute("idAdmin") == null) {
@@ -52,7 +50,7 @@ public class AdminController {
         return "admincadastrar";
     }
 
-    @PostMapping("/cadastrar")
+    @PostMapping("/admin/cadastrar")
     public String cadastrar(@ModelAttribute UsuarioDTO usuario, @RequestParam String role, HttpSession session,
             RedirectAttributes redirectAttributes) {
 

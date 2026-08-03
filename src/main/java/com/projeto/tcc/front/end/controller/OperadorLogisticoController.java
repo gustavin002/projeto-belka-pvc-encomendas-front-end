@@ -20,11 +20,6 @@ public class OperadorLogisticoController {
 
     @Autowired
     private OperadorLogisticoService operadorLogisticoService;
-    
-    @GetMapping("/operadorentregador")
-    public String telaOperadorEscolheEntregador(){
-        return "operadorentregador";
-    }
 
     @PostMapping("/operador/cadastrar/encomendas")
     public String cadastrarEncomenda(@ModelAttribute ClienteDTO cliente, HttpSession session, Model model) {

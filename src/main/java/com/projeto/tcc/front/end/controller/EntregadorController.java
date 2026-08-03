@@ -29,8 +29,8 @@ public class EntregadorController {
         }
         
         String token = (String) session.getAttribute("token");
-        model.addAttribute("entrega", entregadorService.buscarEntrega(idEntrega, token));
-        return "entregador/entrega";
+        model.addAttribute("entrega", entregadorService.verEntrega(idEntrega, token));
+        return "entregadorentregas";
     }
 
     @PostMapping("/entregador/entregas/{idEntrega}/status")

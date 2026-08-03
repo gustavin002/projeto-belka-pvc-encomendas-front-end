@@ -4,7 +4,6 @@
  */
 package com.projeto.tcc.front.end.service;
 
-
 import com.projeto.tcc.front.end.model.ClienteDTO;
 import com.projeto.tcc.front.end.model.EncomendaDTO;
 import com.projeto.tcc.front.end.model.EntregaDTO;
@@ -45,7 +44,7 @@ public class OperadorLogisticoService {
     
     public EntregaDTO escolherEntregador(Integer idEncomenda, String token, Integer idEntregador) {
         return restClient.post()
-            .uri("/operadores/escolher/entregador?idEncomenda={idEncomenda}&idEntregador={idEntregador}", idEncomenda, idEntregador)
+            .uri("/operador/escolher/entregador?idEncomenda={idEncomenda}&idEntregador={idEntregador}", idEncomenda, idEntregador)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregaDTO.class);
