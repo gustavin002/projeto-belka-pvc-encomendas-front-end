@@ -4,7 +4,6 @@
  */
 package com.projeto.tcc.front.end.controller;
 
-
 import com.projeto.tcc.front.end.model.EncomendaDTO;
 import com.projeto.tcc.front.end.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +18,20 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/minha/encomenda")
-    public String minhaEncomenda() {
-        return "minhaencomenda";
-    }
-    
     @GetMapping("/rastreio")
     public String rastrear(@RequestParam(required = false) String codigo, Model model) {
 
-        if (codigo != null && !codigo.isEmpty()) {
+        if (codigo == null || codigo.isEmpty()) {
+            model.addAttribute("erroRastreio", "Digite um código de rastreio");
+            return "index";
+        }
+
+        try {
             EncomendaDTO encomenda = clienteService.rastrearEncomenda(codigo);
             model.addAttribute("encomenda", encomenda);
             return "minhaencomenda";
-        } else {
+
+        } catch (Exception e) {
             model.addAttribute("erroRastreio", "Código de rastreio incorreto");
             return "index";
         }

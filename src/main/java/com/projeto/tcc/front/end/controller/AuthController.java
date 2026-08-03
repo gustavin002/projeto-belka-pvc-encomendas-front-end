@@ -67,8 +67,8 @@ public class AuthController {
             String role = usuarioLogado.getRoleUsuario();
             session.setAttribute("tipoUsuario", role);
 
-            if (role.equals("entregador")) {
-                return "redirect:/entregador";
+            if (role.equalsIgnoreCase("entregador")) {
+                return "redirect:/listar/entregas/entregador";
             } 
                 return "redirect:/operador/encomendas";
             

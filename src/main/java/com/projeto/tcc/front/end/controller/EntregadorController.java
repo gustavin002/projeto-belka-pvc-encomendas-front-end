@@ -21,7 +21,7 @@ public class EntregadorController {
     @Autowired
     private EntregadorService entregadorService;
 
-    @GetMapping("/entregador/entregas/{idEntrega}")
+    @GetMapping("/entregador/entrega/{idEntrega}")
     public String verEntrega(@PathVariable Integer idEntrega, HttpSession session, Model model) {
         
         if (session.getAttribute("token") == null) {
@@ -30,10 +30,10 @@ public class EntregadorController {
         
         String token = (String) session.getAttribute("token");
         model.addAttribute("entrega", entregadorService.verEntrega(idEntrega, token));
-        return "entregadorentregas";
+        return "entregadorentrega";
     }
 
-    @PostMapping("/entregador/entregas/{idEntrega}/status")
+    @PostMapping("/entregador/entrega/{idEntrega}/status")
     public String atualizarStatus(@PathVariable Integer idEntrega, @RequestParam String novoStatus, HttpSession session) {
 
         if (session.getAttribute("token") == null) {
@@ -42,10 +42,10 @@ public class EntregadorController {
         
         String token = (String) session.getAttribute("token");
         entregadorService.atualizarStatus(idEntrega, token, novoStatus);
-        return "redirect:/entregador/entregas/" + idEntrega;
+        return "redirect:/entregador/entrega/" + idEntrega;
     }
 
-    @PostMapping("/entregador/entregas/{idEntrega}/local")
+    @PostMapping("/entregador/entrega/{idEntrega}/local")
     public String atualizarLocal(@PathVariable Integer idEntrega, @RequestParam String novoLocal, HttpSession session) {
 
         if (session.getAttribute("token") == null) {
@@ -54,10 +54,10 @@ public class EntregadorController {
         
         String token = (String) session.getAttribute("token");
         entregadorService.atualizarLocalAtual(idEntrega, token, novoLocal);
-        return "redirect:/entregador/entregas/" + idEntrega;
+        return "redirect:/entregador/entrega/" + idEntrega;
     }
 
-    @PostMapping("/entregador/entregas/{idEntrega}/validar-otp")
+    @PostMapping("/entregador/entrega/{idEntrega}/validar/otp")
     public String validarOtp(@PathVariable Integer idEntrega, @RequestParam String otpDigitado,
         HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -74,7 +74,7 @@ public class EntregadorController {
             redirectAttributes.addFlashAttribute("erroOtp", "Código OTP inválido");
         }
 
-        return "redirect:/entregador/entregas/" + idEntrega;
+        return "redirect:/entregador/entrega/" + idEntrega;
     }
 
 }

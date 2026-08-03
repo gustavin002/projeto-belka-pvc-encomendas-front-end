@@ -25,7 +25,7 @@ public class EncomendaController {
         }
 
         String token = (String) session.getAttribute("token");
-        model.addAttribute("encomendas", encomendaService.listarEncomendasPorOperador(token));
+        model.addAttribute("encomendas", encomendaService.listarEncomendasDoOperador(token));
     
         return "operadorencomendas";
     }

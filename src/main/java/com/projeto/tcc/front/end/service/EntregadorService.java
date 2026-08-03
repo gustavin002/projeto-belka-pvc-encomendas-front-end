@@ -22,7 +22,7 @@ public class EntregadorService {
 
     public EntregaDTO verEntrega(Integer idEntrega, String token) {
         return restClient.get()
-            .uri("/entregadores/entregas/" + idEntrega)
+            .uri("/entregador/entrega/" + idEntrega)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregaDTO.class);
@@ -30,7 +30,7 @@ public class EntregadorService {
 
     public EncomendaDTO atualizarStatus(Integer idEntrega, String token, String novoStatus) {
         return restClient.put()
-            .uri("/entregadores/entregas/{idEntrega}/status?novoStatus={novoStatus}", idEntrega, novoStatus)
+            .uri("/entregador/entrega/{idEntrega}/status?novoStatus={novoStatus}", idEntrega, novoStatus)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EncomendaDTO.class);
@@ -38,7 +38,7 @@ public class EntregadorService {
 
     public EncomendaDTO atualizarLocalAtual(Integer idEntrega, String token, String novoLocal) {
         return restClient.put()
-            .uri("/entregadores/entregas/{idEntrega}/local?novoLocal={novoLocal}", idEntrega, novoLocal)
+            .uri("/entregador/entrega/{idEntrega}/local?novoLocal={novoLocal}", idEntrega, novoLocal)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EncomendaDTO.class);
@@ -46,7 +46,7 @@ public class EntregadorService {
 
     public EntregaDTO validarOTP(Integer idEntrega, String token, String otpDigitado) {
         return restClient.post()
-            .uri("/entregadores/entregas/{idEntrega}/validar-otp?otpDigitado={otpDigitado}", idEntrega, otpDigitado)
+            .uri("/entregador/entrega/{idEntrega}/validar/otp?otpDigitado={otpDigitado}", idEntrega, otpDigitado)
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EntregaDTO.class);

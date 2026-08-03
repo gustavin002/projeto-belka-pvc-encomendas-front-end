@@ -43,7 +43,7 @@ public class AdminService {
 
     public EntregadorDTO cadastrarEntregador(UsuarioDTO usuario, String token) {
         return restClient.post()
-            .uri("/admin/entregadores")
+            .uri("/admin/cadastrar/entregador")
             .header("Authorization", "Bearer " + token)
             .body(usuario)
             .retrieve()
@@ -52,7 +52,7 @@ public class AdminService {
 
     public OperadorLogisticoDTO cadastrarOperadorLogistico(UsuarioDTO usuario, String token) {
         return restClient.post()
-            .uri("/admin/operadores-logisticos")
+            .uri("/admin/cadastrar/operador")
             .header("Authorization", "Bearer " + token)
             .body(usuario)
             .retrieve()
@@ -61,7 +61,7 @@ public class AdminService {
 
     public List<EntregadorDTO> listarEntregadores(String token) {
         EntregadorDTO[] entregadores = restClient.get()
-            .uri("/admin/entregadores")
+            .uri("/admin/listar/entregadores")
             .header("Authorization", "Bearer " + token)    
             .retrieve()
             .body(EntregadorDTO[].class);
@@ -71,7 +71,7 @@ public class AdminService {
 
     public List<OperadorLogisticoDTO> listarOperadoresLogisticos(String token) {
         OperadorLogisticoDTO[] operadores = restClient.get()
-                .uri("/admin/operadores-logisticos")
+                .uri("/admin/listar/operadores")
                 .header("Authorization", "Bearer " + token)
                 .retrieve()
                 .body(OperadorLogisticoDTO[].class);

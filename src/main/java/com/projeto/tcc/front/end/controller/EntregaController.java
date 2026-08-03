@@ -26,7 +26,7 @@ public class EntregaController {
 
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregas", entregaService.listarEntregasDoEntregador(token));
-        return "entregadorentregas";
+        return "entregadorentrega";
     }
 
 }

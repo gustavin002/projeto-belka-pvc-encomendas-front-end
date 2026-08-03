@@ -19,19 +19,9 @@ public class EncomendaService {
         this.restClient = RestClient.builder().baseUrl("http://localhost:9000").build();
     }
 
-    public List<EncomendaDTO> listarEncomendasPorOperador(String token) {
+    public List<EncomendaDTO> listarEncomendasDoOperador(String token) {
         EncomendaDTO[] encomendas = restClient.get()
             .uri("/listar/encomendas/operador")
-            .header("Authorization", "Bearer " + token)
-            .retrieve()
-            .body(EncomendaDTO[].class);
-
-        return Arrays.asList(encomendas);
-    }
-
-    public List<EncomendaDTO> listarEncomendasPorEntregador(String token) {
-        EncomendaDTO[] encomendas = restClient.get()
-            .uri("listar/encomendas/entregador")
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(EncomendaDTO[].class);

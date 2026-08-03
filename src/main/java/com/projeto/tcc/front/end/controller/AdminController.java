@@ -24,7 +24,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @GetMapping
+    @GetMapping("/admin")
     public String painel(HttpSession session, Model model) {
         
         if (session.getAttribute("idAdmin") == null) {

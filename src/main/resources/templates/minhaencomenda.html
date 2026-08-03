@@ -12,25 +12,25 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <body class="bg-light">
     <div class="container mt-5">
         <div class="card shadow-sm">
-            
+ 
             <div class="card-header bg-primary text-white">
                 <h3 class="mb-0">Status da Encomenda</h3>
             </div>
-            
+ 
             <div class="card-body" th:if="${encomenda != null}">
-                <p><strong>Código:</strong> <span th:text="${encomenda.codigoRastreio}"></span></p>
-                <p><strong>Status Atual:</strong> <span class="badge bg-info text-dark" th:text="${encomenda.status}"></span></p>
-                <p><strong>Localização Atual:</strong> <span th:text="${encomenda.localAtual}"></span></p>
+                <p><span>Código:</span> <span th:text="${encomenda.codigoRastreioEncomenda}"></span></p>
+                <p><span>Status Atual:</span> <span class="badge bg-info text-dark" th:text="${encomenda.statusEncomenda}"></span></p>
+                <p><span>Localização Atual:</span> <span th:text="${encomenda.enderecoAtualEncomenda}"></span></p>
                 <hr>
                 <a th:href="@{/}" class="btn btn-secondary">Voltar</a>
             </div>
-
             <div class="card-body" th:if="${encomenda == null}">
                 <p class="text-muted">Nenhuma encomenda encontrada no momento.</p>
                 <a th:href="@{/}" class="btn btn-secondary">Voltar ao Início</a>
             </div>
-            
+ 
         </div>
     </div>
 </body>
 </html>
+ 
