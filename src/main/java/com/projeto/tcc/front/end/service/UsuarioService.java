@@ -29,11 +29,20 @@ public class UsuarioService {
     }
 
     public UsuarioDTO buscarUsuarioLogado(String token) {
-        return restClient.get()
+        UsuarioDTO usuario = restClient.get()               
             .uri("/usuarios/me")
             .header("Authorization", "Bearer " + token)
             .retrieve()
             .body(UsuarioDTO.class);
+        
+        System.out.println(usuario.getIdUsuario());
+        System.out.println(usuario.getNomeUsuario());
+        System.out.println(usuario.getEmailUsuario());
+        System.out.println(usuario.getSenhaUsuario());
+        System.out.println(usuario.getRoleUsuario());
+        System.out.println(usuario.getDisponibilidadeUsuario());
+        
+        return usuario;  
     }
     
 }

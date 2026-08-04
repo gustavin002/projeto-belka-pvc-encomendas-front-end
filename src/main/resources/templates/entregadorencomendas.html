@@ -23,7 +23,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="card-header bg-dark text-white">Atualizações de Rota</div>
                     <div class="card-body">
 
-                        <form th:action="@{/entregador/entregas/{id}/status(id=${entrega.id})}" method="post" class="mb-4">
+                        <form th:action="@{/entregador/entrega/{id}/status(id=${entrega.id})}" method="post" class="mb-4">
                             <label class="form-label">Atualizar Status</label>
                             <div class="input-group">
                                 <input type="text" name="novoStatus" class="form-control" placeholder="Ex: Em rota de entrega" required>
@@ -33,7 +33,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                         <hr>
 
-                        <form th:action="@{/entregador/entregas/{id}/local(id=${entrega.id})}" method="post">
+                        <form th:action="@{/entregador/entrega/{id}/local(id=${entrega.id})}" method="post">
                             <label class="form-label">Atualizar Local Atual</label>
                             <div class="input-group">
                                 <input type="text" name="novoLocal" class="form-control" placeholder="Ex: Bairro Centro" required>
@@ -51,7 +51,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="card-body text-center d-flex flex-column justify-content-center">
                         <p class="text-muted mb-4">Solicite o código de 6 dígitos ao cliente para confirmar a entrega.</p>
                         
-                        <form th:action="@{/entregador/entregas/{id}/validar-otp(id=${entrega.id})}" method="post">
+                        <form th:action="@{/entregador/entrega/{id}/validar-otp(id=${entrega.id})}" method="post">
                             <div class="mb-3">
                                 <input type="text" name="otpDigitado" class="form-control form-control-lg text-center fw-bold" placeholder="000000" maxlength="6" required>
                             </div>
@@ -62,7 +62,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </div>
         
-        <a th:href="@{/entregador}" class="btn btn-outline-dark mt-3">&larr; Voltar para minhas entregas</a>
+        <a th:href="@{/entregador}" class="btn btn-outline-dark mt-3"> Voltar para minhas entregas</a>
     </div>
 </body>
 </html>

@@ -42,6 +42,8 @@ public class AuthController {
     public String logar(@ModelAttribute UserRequestDTO credenciais, HttpSession session,
         RedirectAttributes redirectAttributes) {
 
+        boolean loginAdminFalhou = false;
+
         try {
             String tokenAdmin = adminService.login(credenciais);
             AdminDTO admin = adminService.buscarAdminLogado(tokenAdmin);
@@ -49,36 +51,41 @@ public class AuthController {
             session.setAttribute("idAdmin", admin.getIdAdmin());
             session.setAttribute("tipoUsuario", "admin");
             session.setAttribute("token", tokenAdmin);
-            
+
             return "redirect:/admin";
 
         } catch (Exception e) {
-
+            loginAdminFalhou = true;
         }
 
-        try {
-            String token = usuarioService.login(credenciais);
-            UsuarioDTO usuarioLogado = usuarioService.buscarUsuarioLogado(token);
+        if (loginAdminFalhou) {
+            try {
+                String token = usuarioService.login(credenciais);
+                UsuarioDTO usuarioLogado = usuarioService.buscarUsuarioLogado(token);
 
-            session.setAttribute("token", token);
-            session.setAttribute("idUsuario", usuarioLogado.getIdUsuario());
-            session.setAttribute("nomeUsuario", usuarioLogado.getNomeUsuario());
+                session.setAttribute("token", token);
+                session.setAttribute("idUsuario", usuarioLogado.getIdUsuario());
+                session.setAttribute("nomeUsuario", usuarioLogado.getNomeUsuario());
 
-            String role = usuarioLogado.getRoleUsuario();
-            session.setAttribute("tipoUsuario", role);
+                String role = usuarioLogado.getRoleUsuario();
+                session.setAttribute("tipoUsuario", role);
 
-            if (role.equalsIgnoreCase("entregador")) {
-                return "redirect:/listar/entregas/entregador";
-            } 
+                if (role.equalsIgnoreCase("entregador")) {
+                    
+                    return "redirect:/listar/entregas/entregador";
+                }
+
                 return "redirect:/operador/encomendas";
-            
-            
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("erroLogin", "Email ou senha inválidos");
-            return "redirect:/login";
+
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("erroLogin", "Email ou senha inválidos");
+                return "redirect:/login";
+            }
+
         }
+
+        return "redirect:/login";
     }
-    
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

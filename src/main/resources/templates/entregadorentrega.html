@@ -36,7 +36,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <span th:text="${entrega.encomenda?.enderecoAtualEncomenda}">Local</span>
                         </p>
  
-                        <a th:href="@{/entregador/entregas/{id}(id=${entrega.idEntrega})}"
+                        <a th:href="@{/entregador/entrega/{id}(id=${entrega.idEntrega})}"
                            class="btn btn-outline-primary w-100">Gerenciar Entrega</a>
                     </div>
                 </div>
