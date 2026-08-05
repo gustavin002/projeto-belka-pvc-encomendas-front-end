@@ -34,11 +34,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                                 <div class="mb-3">
                                     <label class="form-label">Senha</label>
-                                    <input type="password" class="form-control" th:field="*{senhaUsuario}" required>
+                                    <input type="password" class="form-control" th:field="*{senhaUsuario}" required minlength="6" maxlength="20" placeholder="Digite de 6 a 20 caracteres">
+
+                                    <div th:if="${erroSenha}" class="text-danger mt-1 small fw-bold">
+                                        <span th:text="${erroSenha}"></span>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="mb-4 p-3 border rounded border-success bg-light">
                                     <label class="form-label fw-bold d-block mb-3">Tipo de Usuário</label>
+                                    
                                     <div class="btn-group w-100" role="group">
                                         <input type="radio" class="btn-check" name="role" id="btnEntregador" value="entregador" required>
                                         <label class="btn btn-outline-success" for="btnEntregador">Entregador</label>
@@ -46,6 +52,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                         <input type="radio" class="btn-check" name="role" id="btnOperador" value="operador logistico" required>
                                         <label class="btn btn-outline-success" for="btnOperador">Operador Logístico</label>
                                     </div>
+                                    
                                 </div>
 
                                 <div class="d-flex justify-content-between mt-4">

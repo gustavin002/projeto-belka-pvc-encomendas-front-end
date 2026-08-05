@@ -5,6 +5,7 @@
 package com.projeto.tcc.front.end.controller;
 
 import com.projeto.tcc.front.end.model.ClienteDTO;
+import com.projeto.tcc.front.end.service.EncomendaService;
 import com.projeto.tcc.front.end.service.OperadorLogisticoService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class OperadorLogisticoController {
 
     @Autowired
     private OperadorLogisticoService operadorLogisticoService;
+    
+    @Autowired
+    private EncomendaService encomendaService;
 
     @PostMapping("/operador/cadastrar/encomendas")
     public String cadastrarEncomenda(@ModelAttribute ClienteDTO cliente, HttpSession session, Model model) {
@@ -42,6 +46,7 @@ public class OperadorLogisticoController {
         }
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregadores", operadorLogisticoService.listarEntregadoresDisponiveis(token));
+        model.addAttribute("encomendas", encomendaService.listarEncomendasDoOperador(token));
         
         return "operadorentregador";
     }

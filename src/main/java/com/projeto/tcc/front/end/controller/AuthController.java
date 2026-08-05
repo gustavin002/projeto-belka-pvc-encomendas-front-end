@@ -42,8 +42,6 @@ public class AuthController {
     public String logar(@ModelAttribute UserRequestDTO credenciais, HttpSession session,
         RedirectAttributes redirectAttributes) {
 
-        boolean loginAdminFalhou = false;
-
         try {
             String tokenAdmin = adminService.login(credenciais);
             AdminDTO admin = adminService.buscarAdminLogado(tokenAdmin);
@@ -55,10 +53,9 @@ public class AuthController {
             return "redirect:/admin";
 
         } catch (Exception e) {
-            loginAdminFalhou = true;
+
         }
 
-        if (loginAdminFalhou) {
             try {
                 String token = usuarioService.login(credenciais);
                 UsuarioDTO usuarioLogado = usuarioService.buscarUsuarioLogado(token);
@@ -82,9 +79,6 @@ public class AuthController {
                 return "redirect:/login";
             }
 
-        }
-
-        return "redirect:/login";
     }
 
     @GetMapping("/logout")

@@ -62,8 +62,10 @@ public class AdminController {
         
         if (role.equalsIgnoreCase("entregador")) {
             adminService.cadastrarEntregador(usuario, token);
+            
         } else if (role.equalsIgnoreCase("operador logistico")){
             adminService.cadastrarOperadorLogistico(usuario, token);
+            
         } else {
             throw new ResponseStatusException(HttpStatusCode.valueOf(400), "Erro!!! role inválida");
         }
