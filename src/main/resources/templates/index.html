@@ -19,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
                             <div th:if="${erroRastreio != null}" class="alert alert-danger" th:text="${erroRastreio}"></div>
 
-                            <form th:action="@{/rastreio}" method="get">
+                            <form th:action="@{cliente/rastreio}" method="get">
                                 <div class="mb-3">
                                     <input type="text" class="form-control form-control-lg" name="codigo" placeholder="Digite o código de rastreio" required>
                                 </div>

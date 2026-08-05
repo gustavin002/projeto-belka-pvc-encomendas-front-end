@@ -6,46 +6,63 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Minhas Entregas</title>
+    <title>Gerenciar Entrega</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-    <div class="container mt-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Minhas Entregas Atribuídas</h2>
-            <a th:href="@{/logout}" class="btn btn-outline-dark btn-sm">Sair</a>
-        </div>
- 
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col" th:each="entrega : ${entregas}">
+    <div class="container mt-5" th:if="${entrega != null}">
+
+        <h2 class="mb-4">Gerenciar Entrega <span class="text-primary" th:text="'#' + ${entrega.idEntrega}"></span></h2>
+
+        <div th:if="${sucessoEntrega != null}" class="alert alert-success" th:text="${sucessoEntrega}"></div>
+        <div th:if="${erroOtp != null}" class="alert alert-danger" th:text="${erroOtp}"></div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
                 <div class="card shadow-sm h-100">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between">
-                        <span>Entrega<span th:text="${entrega.idEntrega}"></span></span>
-                    </div>
+                    <div class="card-header bg-dark text-white">Atualizações de Rota</div>
                     <div class="card-body">
-                        <p class="mb-1">
-                            <span>Status:</span>
-                            <span class="badge bg-secondary" th:text="${entrega.encomenda?.statusEncomenda}">Status</span>
-                        </p>
-                        <p class="mb-1">
-                            <span>Cliente:</span>
-                            <span th:text="${entrega.encomenda?.cliente?.nomeCliente}">Nome</span>
-                        </p>
-                        <p class="mb-3">
-                            <span>Local Atual:</span>
-                            <span th:text="${entrega.encomenda?.enderecoAtualEncomenda}">Local</span>
-                        </p>
- 
-                        <a th:href="@{/entregador/entrega/{id}(id=${entrega.idEntrega})}"
-                           class="btn btn-outline-primary w-100">Gerenciar Entrega</a>
+
+                        <form th:action="@{/entregador/entrega/{id}/status(id=${entrega.idEntrega})}" method="post" class="mb-4">
+                            <label class="form-label">Atualizar Status</label>
+                            <div class="input-group">
+                                <input type="text" name="novoStatus" class="form-control" placeholder="Ex: Em rota de entrega" required>
+                                <button type="submit" class="btn btn-primary">Atualizar</button>
+                            </div>
+                        </form>
+
+                        <hr>
+
+                        <form th:action="@{/entregador/entrega/{id}/local(id=${entrega.idEntrega})}" method="post">
+                            <label class="form-label">Atualizar Local Atual</label>
+                            <div class="input-group">
+                                <input type="text" name="novoLocal" class="form-control" placeholder="Ex: Bairro Centro" required>
+                                <button type="submit" class="btn btn-secondary">Atualizar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm border-success h-100">
+                    <div class="card-header bg-success text-white">Finalizar Entrega (OTP)</div>
+                    <div class="card-body text-center d-flex flex-column justify-content-center">
+                        <p class="text-muted mb-4">Solicite o código de 6 dígitos ao cliente para confirmar a entrega.</p>
+                        
+                        <form th:action="@{/entregador/entrega/{id}/validar/otp(id=${entrega.idEntrega})}" method="post">
+                            <div class="mb-3">
+                                <input type="text" name="otpDigitado" class="form-control form-control-lg text-center fw-bold" placeholder="000000" maxlength="6" required>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-lg w-100">Validar Código e Concluir</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
- 
-        <div th:if="${#lists.isEmpty(entregas)}" class="alert alert-info mt-3">
-            Você não possui nenhuma entrega atribuída no momento.
-        </div>
+        
+        <a th:href="@{/entregador/entregas}" class="btn btn-outline-dark mt-3"> Voltar para minhas entregas</a>
     </div>
 </body>
 </html>

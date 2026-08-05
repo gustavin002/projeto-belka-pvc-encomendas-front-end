@@ -72,7 +72,7 @@ public class AuthController {
 
                 if (role.equalsIgnoreCase("entregador")) {
                     
-                    return "redirect:/listar/entregas/entregador";
+                    return "redirect:/entregador/entregas";
                 }
 
                 return "redirect:/operador/encomendas";

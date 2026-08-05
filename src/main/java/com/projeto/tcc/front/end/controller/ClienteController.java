@@ -18,7 +18,7 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/rastreio")
+    @GetMapping("cliente/rastreio")
     public String rastrear(@RequestParam(required = false) String codigo, Model model) {
 
         if (codigo == null || codigo.isEmpty()) {

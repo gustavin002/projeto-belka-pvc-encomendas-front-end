@@ -17,7 +17,7 @@ public class EntregaController {
     @Autowired
     private EntregaService entregaService;
 
-    @GetMapping("/listar/entregas/entregador")
+    @GetMapping("/entregador/entregas")
     public String listarEntregasDoEntregador(HttpSession session, Model model) {
         
         if (session.getAttribute("token") == null) {
@@ -26,7 +26,8 @@ public class EntregaController {
 
         String token = (String) session.getAttribute("token");
         model.addAttribute("entregas", entregaService.listarEntregasDoEntregador(token));
-        return "entregadorentrega";
+        
+        return "entregadorentregas";
     }
 
 }

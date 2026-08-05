@@ -10,6 +10,7 @@ public class UsuarioDTO {
     private String nomeUsuario;
     private String emailUsuario;
     private String senhaUsuario;
+    private String roleUsuario;
     private String disponibilidadeUsuario;
 
     public Integer getIdUsuario() {
@@ -45,16 +46,11 @@ public class UsuarioDTO {
     }
 
     public String getRoleUsuario() {
-        
-        if (this instanceof EntregadorDTO) {
-            return "entregador";
-        }
-        
-        if (this instanceof OperadorLogisticoDTO) {
-            return "operador logistico";
-        }
-        
-        return "";
+        return roleUsuario;
+    }
+
+    public void setRoleUsuario(String roleUsuario) {
+        this.roleUsuario = roleUsuario;
     }
     
     public String getDisponibilidadeUsuario() {
