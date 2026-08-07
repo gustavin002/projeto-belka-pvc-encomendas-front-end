@@ -11,9 +11,9 @@ public class EncomendaDTO {
     private String codigoRastreioEncomenda;
     private String enderecoAtualEncomenda;
     private String statusEncomenda;
+    private String atribuicaoEncomenda;
     private ClienteDTO cliente;
     private OperadorLogisticoDTO operadorLogistico;
-    private EntregadorDTO entregador;
 
     public Integer getIdEncomenda() {
         return idEncomenda;
@@ -63,12 +63,12 @@ public class EncomendaDTO {
         this.operadorLogistico = operadorLogistico;
     }
 
-    public EntregadorDTO getEntregador() {
-        return entregador;
+    public String getAtribuicaoEncomenda() {
+        return atribuicaoEncomenda;
     }
 
-    public void setEntregador(EntregadorDTO entregador) {
-        this.entregador = entregador;
+    public void setAtribuicaoEncomenda(String atribuicaoEncomenda) {
+        this.atribuicaoEncomenda = atribuicaoEncomenda;
     }
 
 }

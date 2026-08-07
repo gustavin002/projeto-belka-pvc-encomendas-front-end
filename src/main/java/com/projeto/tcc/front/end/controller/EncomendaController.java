@@ -29,5 +29,18 @@ public class EncomendaController {
     
         return "operadorencomendas";
     }
+    
+    @GetMapping("/operador/encomendas")
+    public String listarEncomendasNaoAtribuidasDoOperador(HttpSession session, Model model) { 
+    
+        if (session.getAttribute("token") == null) {
+            return "redirect:/login";
+        }
+
+        String token = (String) session.getAttribute("token");
+        model.addAttribute("encomendas", encomendaService.listarEncomendasNaoAtribuidasDoOperador(token));
+    
+        return "operadorentregador";
+    }
 
 }
